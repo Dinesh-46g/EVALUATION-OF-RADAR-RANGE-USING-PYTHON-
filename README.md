@@ -25,27 +25,41 @@ transmitter gain, receiver gain, radar frequency, radar cross section, and minim
 6. Execute the Program: Run the Python script to calculate and display the maximum range of the radar.
 
 
-   ___Algorithm__:
-   
+ _PROGRAM_:
+asm
+clc;
+clear;
+close;
+Pt = 1000;
+G = 40;
+lambda = 0.05;
+sigma = 10;
+pi4 = (4*%pi)^3;
+R = linspace(1e3, 200e3, 500);
+Pr_R = (Pt .* G^2 .* lambda^2 .* sigma) ./ (pi4 .* R.^4);
+subplot(3,1,1);
+Pr_R_dB = 10 .* log10(Pr_R);
+plot(R/1000, Pr_R_dB);
+Pt_values = linspace(100, 10000, 500);
+R_fixed = 50e3;
+Pr_Pt = (Pt_values .* G^2 .* lambda^2 .* sigma) ./ (pi4 .* R_fixed.^4);
+subplot(3,1,2);
+plot(Pt_values, Pr_Pt);
+G_values = linspace(5, 60, 500);
+Pt_fixed = 3000;
+Pr_G = (Pt_fixed .* G_values.^2 .* lambda^2 .* sigma) ./ (pi4 .* R_fixed.^4);
+subplot(3,1,3);
+plot(G_values, Pr_G);
 
 
-
-
-
-
-
-   __Output__:
-   
-
-
-
-
-
+_Output:
+<img width="1715" height="1010" alt="Screenshot 2025-11-20 234632" src="https://github.com/user-attachments/assets/b1dd8d0b-0d4d-45d0-9092-623180aa659b" />
 
 
    __Result__:
    
 
-
+the maximum range of a radar system using the Radar Range Equation  verified and calculated the results 
+through Python programming.
 
 
